@@ -17,12 +17,12 @@ const reconCategories = [
 
 export default function ReconPage() {
   return (
-    <section className="container mx-auto py-16 px-6">
-      <h1 className="text-4xl font-bold text-center mb-4">
+    <section className="container mx-auto py-16 px-6 bg-white dark:bg-white">
+      <h1 className="text-4xl font-bold text-center mb-4 text-gray-900 dark:text-gray-900">
         Recon Products
       </h1>
 
-      <p className="text-center text-gray-600 mb-12">
+      <p className="text-center text-gray-600 dark:text-gray-600 mb-12">
         Select a category to view products
       </p>
 
@@ -43,8 +43,8 @@ export default function ReconPage() {
                   : `/products?brand=recon`
               }
               className={`
-                group rounded-3xl overflow-hidden bg-white border border-gray-200 shadow-lg
-                hover:shadow-2xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-300
+                group rounded-3xl overflow-hidden bg-white dark:bg-white border border-gray-200 dark:border-gray-200 shadow-lg
+                hover:shadow-2xl hover:bg-gray-50 dark:hover:bg-gray-50 hover:border-gray-300 dark:hover:border-gray-300 transition-all duration-300
                 flex flex-col
                 ${isAll ? "md:col-span-2 scale-105" : ""}
               `}
@@ -62,13 +62,13 @@ export default function ReconPage() {
                 />
               </div>
 
-              <div className="p-6 text-center flex-1 flex flex-col justify-center bg-gradient-to-b from-white to-gray-50">
-                <h2 className={`font-semibold text-gray-900 ${isAll ? "text-2xl" : "text-xl"}`}>
+              <div className="p-6 text-center flex-1 flex flex-col justify-center bg-gradient-to-b from-white to-gray-50 dark:from-white dark:to-gray-50">
+                <h2 className={`font-semibold text-gray-900 dark:text-gray-900 ${isAll ? "text-2xl" : "text-xl"}`}>
                   {cat.title}
                 </h2>
 
                 {isAll && (
-                  <p className="text-gray-600 mt-1 text-sm">
+                  <p className="text-gray-600 dark:text-gray-600 mt-1 text-sm">
                     Browse complete Recon range
                   </p>
                 )}

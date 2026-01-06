@@ -41,7 +41,7 @@ export default function ContactPage() {
         setMessage(data?.error || "Failed to send message");
       } else {
         setMessage("Message sent successfully 🎉");
-        setForm({ name: "", email: "", phone: "", message: "" }); // clear form
+        setForm({ name: "", email: "", phone: "", message: "" });
       }
     } catch (err) {
       setMessage("Something went wrong!");
@@ -51,26 +51,23 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-20 bg-gradient-to-br from-gray-50 to-white min-h-screen">
-      {/* Title */}
+    <div className="max-w-6xl mx-auto px-6 py-20 bg-gradient-to-br from-gray-50 to-white dark:from-gray-50 dark:to-white min-h-screen">
       <div className="text-center mb-16">
-        <h1 className="font-thin text-5xl text-gray-800 mb-4">Contact Us</h1>
-        <p className="font-thin text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
+        <h1 className="font-thin text-5xl text-gray-800 dark:text-gray-800 mb-4">Contact Us</h1>
+        <p className="font-thin text-gray-600 dark:text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
           Have questions or need help? Our team is here to assist you.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-
-        {/* Contact Form */}
-        <div className="p-8 border border-gray-200 rounded-2xl bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
-          <h2 className="font-thin text-2xl mb-6 text-gray-800">Send us a message</h2>
+        <div className="p-8 border border-gray-200 dark:border-gray-200 rounded-2xl bg-white dark:bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <h2 className="font-thin text-2xl mb-6 text-gray-800 dark:text-gray-800">Send us a message</h2>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <input
               name="name"
               placeholder="Full Name"
-              className="w-full border border-gray-300 px-4 py-3 rounded-lg text-sm font-thin focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300"
+              className="w-full border border-gray-300 dark:border-gray-300 px-4 py-3 rounded-lg text-sm font-thin text-gray-900 dark:text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-red-500 focus:border-transparent transition-all duration-300"
               required
               value={form.name}
               onChange={handleChange}
@@ -80,7 +77,7 @@ export default function ContactPage() {
               type="email"
               name="email"
               placeholder="Email Address"
-              className="w-full border border-gray-300 px-4 py-3 rounded-lg text-sm font-thin focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300"
+              className="w-full border border-gray-300 dark:border-gray-300 px-4 py-3 rounded-lg text-sm font-thin text-gray-900 dark:text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-red-500 focus:border-transparent transition-all duration-300"
               required
               value={form.email}
               onChange={handleChange}
@@ -89,7 +86,7 @@ export default function ContactPage() {
             <input
               name="phone"
               placeholder="Phone Number"
-              className="w-full border border-gray-300 px-4 py-3 rounded-lg text-sm font-thin focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300"
+              className="w-full border border-gray-300 dark:border-gray-300 px-4 py-3 rounded-lg text-sm font-thin text-gray-900 dark:text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-red-500 focus:border-transparent transition-all duration-300"
               value={form.phone}
               onChange={handleChange}
             />
@@ -98,7 +95,7 @@ export default function ContactPage() {
               name="message"
               placeholder="Message"
               rows={4}
-              className="w-full border border-gray-300 px-4 py-3 rounded-lg text-sm font-thin focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 resize-none"
+              className="w-full border border-gray-300 dark:border-gray-300 px-4 py-3 rounded-lg text-sm font-thin text-gray-900 dark:text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-red-500 focus:border-transparent transition-all duration-300 resize-none"
               required
               value={form.message}
               onChange={handleChange}
@@ -109,51 +106,54 @@ export default function ContactPage() {
               disabled={loading}
               className={`w-full py-3 rounded-full text-white font-thin transition-all duration-300 ${
                 loading
-                  ? "bg-gray-400 cursor-not-allowed"
-                  : "bg-black hover:bg-red-400 shadow-md hover:shadow-lg"
+                  ? "bg-gray-400 dark:bg-gray-400 cursor-not-allowed"
+                  : "bg-black dark:bg-black hover:bg-red-400 dark:hover:bg-red-400 shadow-md hover:shadow-lg"
               }`}
             >
               {loading ? "Sending..." : "Send Message"}
             </button>
 
             {message && (
-              <p className={`text-center text-sm mt-2 ${message.includes("success") ? "text-green-600" : "text-red-500"}`}>
+              <p
+                className={`text-center text-sm mt-2 ${
+                  message.includes("success") ? "text-green-600 dark:text-green-600" : "text-red-500 dark:text-red-500"
+                }`}
+              >
                 {message}
               </p>
             )}
           </form>
         </div>
 
-        {/* Contact Info */}
-        <div className="p-8 border border-gray-200 rounded-2xl bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
-          <h2 className="font-thin text-2xl mb-6 text-gray-800">Get in touch</h2>
+        <div className="p-8 border border-gray-200 dark:border-gray-200 rounded-2xl bg-white dark:bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <h2 className="font-thin text-2xl mb-6 text-gray-800 dark:text-gray-800">Get in touch</h2>
 
-          <ul className="space-y-6 text-sm text-gray-700">
+          <ul className="space-y-6 text-sm text-gray-700 dark:text-gray-700">
             <li className="flex items-center gap-3 font-thin">
-              <Phone className="w-5 h-5 text-black" />
+              <Phone className="w-5 h-5 text-black dark:text-black" />
               <span><b>Phone:</b> 0300-0000000</span>
             </li>
 
             <li className="flex items-center gap-3 font-thin">
-              <Mail className="w-5 h-5 text-black" />
+              <Mail className="w-5 h-5 text-black dark:text-black" />
               <span><b>Email:</b> support@recon.pk</span>
             </li>
 
             <li className="flex items-center gap-3 font-thin">
-              <MapPin className="w-5 h-5 text-black" />
+              <MapPin className="w-5 h-5 text-black dark:text-black" />
               <span><b>Address:</b> Lahore, Pakistan</span>
             </li>
 
             <li className="flex items-center gap-3 font-thin">
-              <Clock className="w-5 h-5 text-black" />
+              <Clock className="w-5 h-5 text-black dark:text-black" />
               <span><b>Support Hours:</b> Mon–Sat / 9AM–6PM</span>
             </li>
           </ul>
 
           <div className="mt-8">
-            <h3 className="font-thin mb-4 text-lg text-gray-800">Find us on map</h3>
+            <h3 className="font-thin mb-4 text-lg text-gray-800 dark:text-gray-800">Find us on map</h3>
 
-            <div className="rounded-xl overflow-hidden border border-gray-200 shadow-sm">
+            <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-200 shadow-sm">
               <iframe
                 src="https://www.google.com/maps/embed?pb="
                 width="100%"
@@ -164,7 +164,6 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );

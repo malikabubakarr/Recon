@@ -27,23 +27,21 @@ const bestSellers = [
 export default function BestSellers() {
   return (
     <section className="bg-white py-16 px-4 border-b border-gray-200">
-      <div className="container mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-2">
+      <div className="container mx-auto text-gray-900">
+        <h2 className="text-3xl font-bold text-center mb-2 text-gray-900">
           Best Sellers
         </h2>
 
-        <p className="text-center text-gray-500 mb-12">
+        <p className="text-center mb-12 text-gray-600">
           Most loved products by our customers
         </p>
 
-        {/* Like screenshot: three equal blocks */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {bestSellers.map((p, i) => (
             <div key={i} className="w-full">
-              {/* Image */}
               <Link
                 href={`/products?category=${encodeURIComponent(p.category)}`}
-                className="block rounded-2xl overflow-hidden shadow hover:shadow-xl transition"
+                className="block rounded-2xl overflow-hidden shadow hover:shadow-xl transition bg-white"
               >
                 <div className="relative h-[420px] bg-white">
                   <Image
@@ -55,8 +53,7 @@ export default function BestSellers() {
                 </div>
               </Link>
 
-              {/* Title + Button (like screenshot) */}
-              <div className="mt-6">
+              <div className="mt-6 text-gray-900">
                 <h3 className="text-xl font-semibold mb-4">
                   {p.name}
                 </h3>

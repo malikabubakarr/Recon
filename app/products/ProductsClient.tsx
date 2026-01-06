@@ -28,12 +28,8 @@ export default function ProductsClient() {
       .then((data) => {
         let filtered: Product[] = data;
 
-        // Convert string to slug for comparison
         const slugify = (str: string = "") =>
-          str
-            .toLowerCase()
-            .replace(/\s+/g, "-")
-            .replace(/[^\w-]/g, "");
+          str.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "");
 
         if (brandFilter) {
           filtered = filtered.filter(
@@ -56,16 +52,21 @@ export default function ProductsClient() {
       });
   }, [brandFilter, categoryFilter]);
 
-  if (loading) return <p className="p-10 text-center">Loading products…</p>;
+  if (loading)
+    return (
+      <p className="p-10 text-center text-gray-800 bg-white">
+        Loading products…
+      </p>
+    );
 
   return (
-    <section className="container mx-auto py-16 px-6">
+    <section className="container mx-auto py-16 px-6 bg-white">
       <h1 className="font-thin text-4xl mb-12 text-gray-800 text-center">
         {brandFilter ? `${brandFilter} Products` : "All Products"}
       </h1>
 
       {products.length === 0 ? (
-        <p className="font-thin text-gray-500 text-center text-lg mt-12">
+        <p className="font-thin text-gray-800 text-center text-lg mt-12">
           No products found.
         </p>
       ) : (
