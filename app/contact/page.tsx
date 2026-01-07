@@ -1,9 +1,16 @@
+// app/contact/page.tsx
 "use client";
 
+import Head from "next/head";
 import { useState } from "react";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
 export default function ContactPage() {
+  const pageTitle = "Contact RECON | Makson International";
+  const pageDescription =
+    "Get in touch with RECON, the trusted personal-care brand. Fill out our contact form or reach us via phone or email for support and inquiries.";
+  const canonicalUrl = "https://maksoninternational.com/contact"; // replace with your domain
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -26,24 +33,17 @@ export default function ContactPage() {
       const res = await fetch("/api/messages", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          phone: form.phone,
-          message: form.message,
-          source: "contact",
-        }),
+        body: JSON.stringify({ ...form, source: "contact" }),
       });
 
       const data = await res.json();
 
-      if (!res.ok) {
-        setMessage(data?.error || "Failed to send message");
-      } else {
+      if (!res.ok) setMessage(data?.error || "Failed to send message");
+      else {
         setMessage("Message sent successfully 🎉");
         setForm({ name: "", email: "", phone: "", message: "" });
       }
-    } catch (err) {
+    } catch {
       setMessage("Something went wrong!");
     } finally {
       setLoading(false);
@@ -52,6 +52,26 @@ export default function ContactPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-20 bg-gradient-to-br from-gray-50 to-white dark:from-gray-50 dark:to-white min-h-screen">
+      
+      {/* ------------------ SEO HEAD ------------------ */}
+      <Head>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <meta
+          name="keywords"
+          content="Contact RECON, Makson International, Personal Care, Hair Care, Wax, Lotions, Tissues, Support"
+        />
+        {/* Open Graph */}
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content="/images/recon-logo.jpg" /> {/* optional logo */}
+        {/* Canonical */}
+        <link rel="canonical" href={canonicalUrl} />
+      </Head>
+
+      {/* ------------------ PAGE CONTENT ------------------ */}
       <div className="text-center mb-16">
         <h1 className="font-thin text-5xl text-gray-800 dark:text-gray-800 mb-4">Contact Us</h1>
         <p className="font-thin text-gray-600 dark:text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
@@ -60,6 +80,7 @@ export default function ContactPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        {/* Form */}
         <div className="p-8 border border-gray-200 dark:border-gray-200 rounded-2xl bg-white dark:bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
           <h2 className="font-thin text-2xl mb-6 text-gray-800 dark:text-gray-800">Send us a message</h2>
 
@@ -125,6 +146,7 @@ export default function ContactPage() {
           </form>
         </div>
 
+        {/* Contact Info */}
         <div className="p-8 border border-gray-200 dark:border-gray-200 rounded-2xl bg-white dark:bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
           <h2 className="font-thin text-2xl mb-6 text-gray-800 dark:text-gray-800">Get in touch</h2>
 
@@ -152,7 +174,6 @@ export default function ContactPage() {
 
           <div className="mt-8">
             <h3 className="font-thin mb-4 text-lg text-gray-800 dark:text-gray-800">Find us on map</h3>
-
             <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-200 shadow-sm">
               <iframe
                 src="https://www.google.com/maps/embed?pb="

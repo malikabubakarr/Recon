@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import Head from "next/head";
 import ProductCard from "@/components/ProductCard";
 
 interface Product {
@@ -59,30 +60,67 @@ export default function ProductsClient() {
       </p>
     );
 
-  return (
-    <section className="container mx-auto py-16 px-6 bg-white">
-      <h1 className="font-thin text-4xl mb-12 text-gray-800 text-center">
-        {brandFilter ? `${brandFilter} Products` : "All Products"}
-      </h1>
+  // ------------------ SEO DATA ------------------
+  const pageTitle = brandFilter
+    ? `${brandFilter} Products | RECON`
+    : categoryFilter
+    ? `${categoryFilter} Products | RECON`
+    : "All Products | RECON";
 
-      {products.length === 0 ? (
-        <p className="font-thin text-gray-800 text-center text-lg mt-12">
-          No products found.
-        </p>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {products.map((p) => (
-            <ProductCard
-              key={p._id}
-              _id={p._id}
-              name={p.name}
-              price={p.price}
-              category={p.category}
-              image={p.image}
-            />
-          ))}
-        </div>
-      )}
-    </section>
+  const pageDescription =
+    brandFilter || categoryFilter
+      ? `Browse ${brandFilter || ""} ${categoryFilter || ""} products from RECON.`
+      : "Browse all RECON products online.";
+
+  const canonicalUrl = `https://maksoninternational.com/products${
+    brandFilter ? `?brand=${brandFilter}` : categoryFilter ? `?category=${categoryFilter}` : ""
+  }`;
+
+  return (
+    <>
+      {/* ------------------ SEO HEAD ------------------ */}
+      <Head>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <meta name="keywords" content={`RECON, Mason International, ${brandFilter || ""}, ${categoryFilter || ""}`} />
+
+        {/* Open Graph */}
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalUrl} />
+        {/* Optional: You can add a default OG image */}
+        <meta property="og:image" content="/default-og-image.jpg" />
+
+        {/* Canonical */}
+        <link rel="canonical" href={canonicalUrl} />
+      </Head>
+
+      {/* ------------------ PAGE CONTENT ------------------ */}
+      <section className="container mx-auto py-16 px-6 bg-white">
+        <h1 className="font-thin text-4xl mb-12 text-gray-800 text-center">
+          {brandFilter ? `${brandFilter} Products` : categoryFilter ? `${categoryFilter} Products` : "All Products"}
+        </h1>
+
+        {products.length === 0 ? (
+          <p className="font-thin text-gray-800 text-center text-lg mt-12">
+            No products found.
+          </p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {products.map((p) => (
+              <ProductCard
+                key={p._id}
+                _id={p._id}
+                name={p.name}
+                price={p.price}
+                category={p.category}
+                image={p.image}
+              />
+            ))}
+          </div>
+        )}
+      </section>
+    </>
   );
 }

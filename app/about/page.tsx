@@ -1,9 +1,36 @@
 // app/about/page.tsx
+import Head from "next/head";
 
 export default function About() {
+  const pageTitle = "About RECON | Makson International";
+  const pageDescription =
+    "Learn about RECON, the trusted personal-care brand by Mason International. Discover our mission, vision, values, and product range.";
+  const canonicalUrl = "https://maksoninternational.com/about"; // replace with your actual domain
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-50 dark:to-white py-20 px-6">
       
+      {/* ------------------ SEO HEAD ------------------ */}
+      <Head>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <meta
+          name="keywords"
+          content="RECON, Mason International, About RECON, Personal Care, Hair Color, Hair Oil, Wax, Lotions, Tissues"
+        />
+
+        {/* Open Graph */}
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content="/logo.png" /> {/* optional logo image */}
+
+        {/* Canonical */}
+        <link rel="canonical" href={canonicalUrl} />
+      </Head>
+
+      {/* ------------------ PAGE CONTENT ------------------ */}
       {/* Title */}
       <h1 className="font-light text-5xl text-center mb-16 text-gray-900 dark:text-gray-900 tracking-wide">
         About Us
@@ -37,7 +64,6 @@ export default function About() {
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          
           <div className="p-8 border border-gray-200 dark:border-gray-200 rounded-xl bg-white dark:bg-white shadow-sm hover:shadow-lg transition duration-300">
             <h3 className="font-light text-xl mb-3 text-gray-900 dark:text-gray-900">Hair Color</h3>
             <p className="font-light text-gray-600 dark:text-gray-600">
@@ -79,7 +105,6 @@ export default function About() {
               Comfortable shaving solutions for smooth, irritation-free results.
             </p>
           </div>
-
         </div>
       </section>
 

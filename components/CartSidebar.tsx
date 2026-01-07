@@ -91,7 +91,6 @@ export default function CartSidebar() {
         return;
       }
 
-      // Clear cart & reset form
       clearCart();
       setCheckoutMode(false);
       setForm({
@@ -105,8 +104,9 @@ export default function CartSidebar() {
         paymentMethod: "cod",
       });
 
-      // Redirect to Thank You page with orderId and paymentMethod
-      router.push(`/thank-you?orderId=${data.orderId}&paymentMethod=${form.paymentMethod}`);
+      router.push(
+        `/thank-you?orderId=${data.orderId}&paymentMethod=${form.paymentMethod}`
+      );
     } catch (err) {
       setMessage("Something went wrong!");
     } finally {
@@ -115,37 +115,35 @@ export default function CartSidebar() {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end">
-      {/* Transparent overlay to close cart */}
+    <div className="fixed inset-0 z-50 flex justify-end dark:bg-transparent dark:text-black">
       <div
         className="fixed inset-0 cursor-pointer"
         onClick={closeCart}
       ></div>
 
-      <div className="relative w-full sm:w-[400px] md:w-[450px] bg-white h-full p-6 shadow-2xl border-l border-gray-200 overflow-y-auto">
-        {/* Close button */}
+      <div className="relative w-full sm:w-[400px] md:w-[450px] bg-white dark:bg-white h-full p-6 shadow-2xl border-l border-gray-200 dark:border-gray-200 overflow-y-auto dark:text-black">
         <button
           onClick={closeCart}
-          className="absolute top-5 right-5 text-gray-400 hover:text-black text-2xl"
+          className="absolute top-5 right-5 text-gray-400 hover:text-black dark:text-gray-400 dark:hover:text-black text-2xl"
         >
           ✕
         </button>
 
-        <h2 className="text-2xl font-semibold mb-4">Your Cart</h2>
+        <h2 className="text-2xl font-semibold mb-4 dark:text-black">Your Cart</h2>
 
-        {/* Empty cart */}
         {items.length === 0 && !checkoutMode && (
-          <p className="text-gray-500 mt-10 text-center">Cart is empty.</p>
+          <p className="text-gray-500 dark:text-gray-700 mt-10 text-center">
+            Cart is empty.
+          </p>
         )}
 
-        {/* Cart Items */}
         {!checkoutMode && items.length > 0 && (
           <>
             <div className="space-y-5 max-h-[60vh] overflow-y-auto pr-2">
               {items.map((item) => (
                 <div
                   key={item._id}
-                  className="flex gap-4 items-center border p-3 rounded-xl"
+                  className="flex gap-4 items-center border p-3 rounded-xl bg-white dark:bg-white dark:border-gray-200"
                 >
                   {item.image && (
                     <Image
@@ -158,21 +156,22 @@ export default function CartSidebar() {
                   )}
 
                   <div className="flex-1">
-                    <p className="font-medium">{item.name}</p>
-                    <p className="text-sm text-gray-500">Rs. {item.price}</p>
+                    <p className="font-medium dark:text-black">{item.name}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-700">
+                      Rs. {item.price}
+                    </p>
 
-                    {/* Quantity */}
                     <div className="flex items-center gap-2 mt-2">
                       <button
                         onClick={() => decreaseQty(item._id)}
-                        className="w-7 h-7 border rounded-full flex items-center justify-center"
+                        className="w-7 h-7 border rounded-full flex items-center justify-center dark:border-gray-300"
                       >
                         −
                       </button>
-                      <span>{item.qty}</span>
+                      <span className="dark:text-black">{item.qty}</span>
                       <button
                         onClick={() => addToCart({ ...item, qty: 1 })}
-                        className="w-7 h-7 border rounded-full flex items-center justify-center"
+                        className="w-7 h-7 border rounded-full flex items-center justify-center dark:border-gray-300"
                       >
                         +
                       </button>
@@ -189,23 +188,24 @@ export default function CartSidebar() {
               ))}
             </div>
 
-            {/* Totals */}
-            <div className="mt-6 border-t pt-4 space-y-2">
-              <p className="flex justify-between text-gray-700">
+            <div className="mt-6 border-t pt-4 space-y-2 dark:border-gray-200">
+              <p className="flex justify-between text-gray-700 dark:text-black">
                 <span>Subtotal</span>
                 <span>Rs. {totalAmount}</span>
               </p>
-              <p className="flex justify-between text-gray-700">
+              <p className="flex justify-between text-gray-700 dark:text-black">
                 <span>Delivery</span>
                 <span>{delivery === 0 ? "FREE" : `Rs. ${delivery}`}</span>
               </p>
-              <p className="flex justify-between font-semibold text-lg">
+              <p className="flex justify-between font-semibold text-lg dark:text-black">
                 <span>Total</span>
                 <span>Rs. {grandTotal}</span>
               </p>
 
               <div className="mt-5 space-y-3">
-                <button className="w-full border py-2 rounded-lg">View Cart</button>
+                <button className="w-full border py-2 rounded-lg dark:border-gray-300 dark:text-black">
+                  View Cart
+                </button>
                 <button
                   onClick={() => setCheckoutMode(true)}
                   className="w-full bg-black text-white py-2 rounded-lg"
@@ -217,24 +217,25 @@ export default function CartSidebar() {
           </>
         )}
 
-        {/* Checkout Form */}
         {checkoutMode && (
           <div className="mt-4">
-            <h3 className="text-xl font-semibold mb-4">Order Details</h3>
+            <h3 className="text-xl font-semibold mb-4 dark:text-black">
+              Order Details
+            </h3>
 
             <form className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <input
                   name="firstName"
                   placeholder="First Name"
-                  className="w-full border rounded-lg p-2"
+                  className="w-full border rounded-lg p-2 dark:bg-white dark:border-gray-300 dark:text-black"
                   value={form.firstName}
                   onChange={handleChange}
                 />
                 <input
                   name="lastName"
                   placeholder="Last Name"
-                  className="w-full border rounded-lg p-2"
+                  className="w-full border rounded-lg p-2 dark:bg-white dark:border-gray-300 dark:text-black"
                   value={form.lastName}
                   onChange={handleChange}
                 />
@@ -243,14 +244,14 @@ export default function CartSidebar() {
               <input
                 name="phone"
                 placeholder="Phone"
-                className="w-full border rounded-lg p-2"
+                className="w-full border rounded-lg p-2 dark:bg-white dark:border-gray-300 dark:text-black"
                 value={form.phone}
                 onChange={handleChange}
               />
               <input
                 name="email"
                 placeholder="Email"
-                className="w-full border rounded-lg p-2"
+                className="w-full border rounded-lg p-2 dark:bg-white dark:border-gray-300 dark:text-black"
                 value={form.email}
                 onChange={handleChange}
               />
@@ -259,14 +260,14 @@ export default function CartSidebar() {
                 <input
                   name="province"
                   placeholder="Province / State"
-                  className="w-full border rounded-lg p-2"
+                  className="w-full border rounded-lg p-2 dark:bg-white dark:border-gray-300 dark:text-black"
                   value={form.province}
                   onChange={handleChange}
                 />
                 <input
                   name="city"
                   placeholder="City"
-                  className="w-full border rounded-lg p-2"
+                  className="w-full border rounded-lg p-2 dark:bg-white dark:border-gray-300 dark:text-black"
                   value={form.city}
                   onChange={handleChange}
                 />
@@ -276,18 +277,20 @@ export default function CartSidebar() {
                 name="address"
                 placeholder="Full Address"
                 rows={3}
-                className="w-full border rounded-lg p-2"
+                className="w-full border rounded-lg p-2 dark:bg-white dark:border-gray-300 dark:text-black"
                 value={form.address}
                 onChange={handleChange}
               />
 
-              <div className="flex gap-4">
+              <div className="flex gap-4 dark:text-black">
                 <label className="flex items-center gap-2">
                   <input
                     type="radio"
                     value="cod"
                     checked={form.paymentMethod === "cod"}
-                    onChange={() => setForm({ ...form, paymentMethod: "cod" })}
+                    onChange={() =>
+                      setForm({ ...form, paymentMethod: "cod" })
+                    }
                   />
                   Cash on Delivery
                 </label>
@@ -296,7 +299,9 @@ export default function CartSidebar() {
                     type="radio"
                     value="bank"
                     checked={form.paymentMethod === "bank"}
-                    onChange={() => setForm({ ...form, paymentMethod: "bank" })}
+                    onChange={() =>
+                      setForm({ ...form, paymentMethod: "bank" })
+                    }
                   />
                   Bank Transfer
                 </label>
@@ -312,13 +317,15 @@ export default function CartSidebar() {
               </button>
 
               {message && (
-                <p className="text-center text-sm mt-2 text-red-500">{message}</p>
+                <p className="text-center text-sm mt-2 text-red-500">
+                  {message}
+                </p>
               )}
 
               <button
                 type="button"
                 onClick={() => setCheckoutMode(false)}
-                className="w-full border py-2 rounded-lg"
+                className="w-full border py-2 rounded-lg dark:border-gray-300 dark:text-black"
               >
                 Back to Cart
               </button>
