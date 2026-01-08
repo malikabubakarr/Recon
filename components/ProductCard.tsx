@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
+import { useState } from "react";
 
 interface ProductCardProps {
   _id: string;
@@ -22,6 +23,14 @@ export default function ProductCard({
   image,
 }: ProductCardProps) {
   const { addToCart } = useCart();
+  const [added, setAdded] = useState(false);
+
+  const handleAddToCart = () => {
+    addToCart({ _id, name, price, qty: 1, image });
+    setAdded(true);
+
+    setTimeout(() => setAdded(false), 1000);
+  };
 
   return (
     <div className="max-w-md w-full mx-auto border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-lg transition bg-white flex flex-col">
@@ -39,7 +48,6 @@ export default function ProductCard({
       )}
 
       <h2 className="text-xl font-semibold text-gray-900">{name}</h2>
-
       <p className="text-gray-500 text-sm mb-2">{category}</p>
 
       {description && (
@@ -61,12 +69,14 @@ export default function ProductCard({
         </Link>
 
         <button
-          onClick={() =>
-            addToCart({ _id, name, price, qty: 1, image })
-          }
-          className="ml-auto bg-black text-white px-5 py-2 rounded-full hover:bg-gray-800 transition text-sm"
+          onClick={handleAddToCart}
+          className={`ml-auto px-5 py-2 rounded-full text-sm transition-all duration-200 ${
+            added
+              ? "bg-green-600 text-white scale-105"
+              : "bg-black text-white hover:bg-gray-800"
+          }`}
         >
-          Add to Cart
+          {added ? "Added ✓ check cart icon above" : "Add to Cart"}
         </button>
       </div>
     </div>
