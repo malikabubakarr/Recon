@@ -92,9 +92,9 @@ export default function TermsAndConditions() {
         <div>
           <h2 className="text-2xl text-gray-800 mb-3">10. Contact Us</h2>
           <p className="space-y-1">
-            <span className="block">Address: (add Recon address here)</span>
-            <span className="block">Email: (add email here)</span>
-            <span className="block">Phone: (add phone / WhatsApp here)</span>
+            <span className="block">Address: Plot 233, Sabzazar Block F Sabzazar Housing Scheme Phase 1 & 2 Lahore</span>
+            <span className="block">Email: info@recon.com</span>
+            <span className="block">Phone: +92 339 0554460</span>
           </p>
         </div>
 

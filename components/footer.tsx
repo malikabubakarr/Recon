@@ -25,19 +25,19 @@ export default function Footer() {
           <p className="font-thin text-gray-300">Official Recon Brand</p>
 
           <div className="flex gap-4 mt-4">
-            <Link href="https://facebook.com" target="_blank">
+            <Link href="https://www.facebook.com/share/1A81LNVdx5/?mibextid=wwXIfr" target="_blank">
               <span className="hover:text-red-500 transition-colors duration-300 inline-block p-2 rounded-full hover:bg-gray-800">
                 <FaFacebookF size={20} />
               </span>
             </Link>
 
-            <Link href="https://instagram.com" target="_blank">
+            <Link href="https://www.instagram.com/officialrecon5?igsh=MXViMGVtbHR2eW1lbQ==" target="_blank">
               <span className="hover:text-red-500 transition-colors duration-300 inline-block p-2 rounded-full hover:bg-gray-800">
                 <FaInstagram size={20} />
               </span>
             </Link>
 
-            <Link href="https://wa.me/923001234567" target="_blank">
+            <Link href="https://wa.me/923390554460" target="_blank">
               <span className="hover:text-red-500 transition-colors duration-300 inline-block p-2 rounded-full hover:bg-gray-800">
                 <FaWhatsapp size={20} />
               </span>
@@ -62,15 +62,15 @@ export default function Footer() {
           <p className="font-thin text-gray-300">
             Phone:{" "}
             <a
-              href="tel:+921234567890"
+              href="tel:+923390554460"
               className="hover:text-red-500 transition-colors duration-300"
             >
-              +92 123 4567890
+              +92 339 0554460
             </a>
           </p>
 
           <p className="font-thin text-gray-300">
-            Address: 123 Recon Street, Lahore, Pakistan
+            Plot 233, Sabzazar Block F Sabzazar Housing Scheme Phase 1 & 2 Lahore
           </p>
         </div>
 

@@ -153,7 +153,7 @@ export default function ContactPage() {
           <ul className="space-y-6 text-sm text-gray-700 dark:text-gray-700">
             <li className="flex items-center gap-3 font-thin">
               <Phone className="w-5 h-5 text-black dark:text-black" />
-              <span><b>Phone:</b> 0300-0000000</span>
+              <span><b>Phone:</b> 03390554460</span>
             </li>
 
             <li className="flex items-center gap-3 font-thin">
@@ -163,7 +163,7 @@ export default function ContactPage() {
 
             <li className="flex items-center gap-3 font-thin">
               <MapPin className="w-5 h-5 text-black dark:text-black" />
-              <span><b>Address:</b> Lahore, Pakistan</span>
+              <span><b>Address:</b> Plot 233, Sabzazar Block F Sabzazar Housing Scheme Phase 1 & 2 Lahore</span>
             </li>
 
             <li className="flex items-center gap-3 font-thin">
@@ -176,7 +176,7 @@ export default function ContactPage() {
             <h3 className="font-thin mb-4 text-lg text-gray-800 dark:text-gray-800">Find us on map</h3>
             <div className="rounded-xl overflow-hidden border border-gray-200 dark:border-gray-200 shadow-sm">
               <iframe
-                src="https://www.google.com/maps/embed?pb="
+                src="https://maps.app.goo.gl/etKvdyQwtGtCcGfk6?g_st=ipc"
                 width="100%"
                 height="240"
                 loading="lazy"
