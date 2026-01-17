@@ -36,7 +36,7 @@ export default function Navbar() {
     <header className="w-full font-sans">
       {/* Top Announcement Bar */}
       <div className="bg-black text-white text-center text-sm py-3 font-thin">
-        Pakistan&apos;s most awarded brand.
+        Recon most awarded Pakistan hair color brand.
       </div>
 
       {/* Main Navbar */}

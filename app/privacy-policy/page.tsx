@@ -132,8 +132,8 @@ export default function PrivacyPolicy() {
           </p>
 
           <p>Email: info@recon.com</p>
-          <p>Phone: +92 000 0000000</p>
-          <p>Address: Lahore, Pakistan</p>
+          <p>Phone: +92 339 0554460</p>
+          <p>Address: Plot 233, Sabzazar Block F Sabzazar Housing Scheme Phase 1 & 2 Lahore</p>
         </section>
 
       </div>

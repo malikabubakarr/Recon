@@ -6,23 +6,23 @@ import { Plus, Minus } from "lucide-react";
 const faqs = [
   {
     q: "What causes hair fall and how can I reduce it?",
-    a: "Hair fall can be caused by stress, poor diet, hormonal imbalance, heat styling, harsh chemicals, or genetics. Reduce hair fall by using gentle shampoos, oiling regularly, avoiding tight hairstyles, eating a balanced diet, and limiting heat styling."
+    a: "Hair fall can be caused by stress, poor diet, hormonal imbalance, heat styling, harsh chemicals, or genetics. Reduce hair fall by using Recon Hair Color products carefully, gentle shampoos, oiling regularly, avoiding tight hairstyles, eating a balanced diet, and limiting heat styling."
   },
   {
     q: "How often should I wash my hair?",
-    a: "Wash 2–3 times per week. Oily hair types may need more frequent washing, while dry hair benefits from fewer washes to retain natural moisture."
+    a: "Wash 2–3 times per week. Oily hair types may need more frequent washing, while dry hair benefits from fewer washes to retain natural moisture. Always pair with Recon Hair Care products for best results."
   },
   {
-    q: "Is Recon Hair Dye safe to use?",
+    q: "Is Recon Hair Color safe to use?",
     a: "Yes — when used as directed. Always perform a patch test 24 hours before application and follow instructions carefully."
   },
   {
-    q: "Is Recon Hair Dye ammonia-free?",
-    a: "Most Samsol shades are formulated without harsh ammonia to be gentler on hair while still providing long-lasting color. Always check the product label for details."
+    q: "Is Recon Hair Color ammonia-free?",
+    a: "Most Recon shades are formulated without harsh ammonia to be gentler on hair while still providing long-lasting color. Always check the product label for details."
   },
   {
-    q: "Can I use Recon Hair Dye on chemically or henna-treated hair?",
-    a: "Yes — but wait at least 2–3 weeks after another treatment. Perform a strand test first to check color results and hair reaction."
+    q: "Can I use Recon Hair Color on chemically or henna-treated hair?",
+    a: "Yes — but wait at least 2–3 weeks after another treatment. Perform a strand test first to check color results and hair reaction. Use Recon Hair Care for best compatibility."
   }
 ];
 
@@ -32,7 +32,7 @@ export default function HairFaq() {
   return (
     <section className="container mx-auto px-4 py-14">
       <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
-        Frequently Asked Questions
+        Recon Hair Color FAQs
       </h2>
 
       <div className="space-y-3">

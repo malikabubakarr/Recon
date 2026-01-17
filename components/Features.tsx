@@ -11,10 +11,10 @@ export default function Features() {
         <div className="space-y-2">
           <Truck className="mx-auto w-10 h-10" />
           <h3 className="font-semibold tracking-wide">
-            FREE SHIPPING
+            Recon Free Shipping
           </h3>
           <p className="text-sm text-gray-500">
-            Free shipping on orders above Rs. 6,000
+            Recon offers free shipping on orders above Rs. 2,000
           </p>
         </div>
 
@@ -22,10 +22,10 @@ export default function Features() {
         <div className="space-y-2">
           <Headphones className="mx-auto w-10 h-10" />
           <h3 className="font-semibold tracking-wide">
-            Customer Support
+            Recon Customer Support
           </h3>
           <p className="text-sm text-gray-500">
-            Contact us 9AM – 6PM (Mon to Sat)
+            Contact Recon support 9AM – 6PM (Mon to Sat)
           </p>
         </div>
 
@@ -33,10 +33,10 @@ export default function Features() {
         <div className="space-y-2">
           <Lock className="mx-auto w-10 h-10" />
           <h3 className="font-semibold tracking-wide">
-            Secure payment
+            Recon Secure Payment
           </h3>
           <p className="text-sm text-gray-500">
-            Trusted & secure checkout
+            Trusted & secure checkout for all Recon orders
           </p>
         </div>
 

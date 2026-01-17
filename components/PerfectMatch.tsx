@@ -17,7 +17,7 @@ export default function PerfectMatch() {
         {/* Heading */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-            Find Your Perfect Match
+            Recon products are made with
           </h2>
 
         <p className="mt-3 text-gray-500">
