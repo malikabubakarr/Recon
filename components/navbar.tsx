@@ -57,10 +57,10 @@ export default function Navbar() {
 
             {/* Center Menu - Desktop */}
             <nav className="hidden lg:flex items-center gap-12 text-sm font-thin tracking-wide text-gray-800">
-              <Link href="/" className="hover:text-red-500 transition-colors duration-300">HOME</Link>
+              <Link href="/" className="hover:text-red-500 transition-colors duration-300">Home</Link>
               <Link href="/about" className="hover:text-red-500 transition-colors duration-300">About Us</Link>
-              <Link href="/recon" className="hover:text-red-500 transition-colors duration-300">PRODUCTS</Link>
-              <Link href="/media" className="hover:text-red-500 transition-colors duration-300">MEDIA</Link>
+              <Link href="/recon" className="hover:text-red-500 transition-colors duration-300">Products</Link>
+              <Link href="/media" className="hover:text-red-500 transition-colors duration-300">Media</Link>
               <Link href="/contact" className="hover:text-red-500 transition-colors duration-300">Contact Us</Link>
             </nav>
 
@@ -138,10 +138,10 @@ export default function Navbar() {
           {isMenuOpen && (
             <div className="lg:hidden bg-white border-t border-gray-200 py-4">
               <nav className="flex flex-col items-center gap-4 text-sm font-thin tracking-wide text-gray-800">
-                <Link href="/" className="hover:text-red-500 transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>HOME</Link>
+                <Link href="/" className="hover:text-red-500 transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>Home</Link>
                 <Link href="/about" className="hover:text-red-500 transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>About Us</Link>
-                <Link href="/recon" className="hover:text-red-500 transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>PRODUCTS</Link>
-                <Link href="/media" className="hover:text-red-500 transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>MEDIA</Link>
+                <Link href="/recon" className="hover:text-red-500 transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>Products</Link>
+                <Link href="/media" className="hover:text-red-500 transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>Media</Link>
                 <Link href="/contact" className="hover:text-red-500 transition-colors duration-300" onClick={() => setIsMenuOpen(false)}>Contact Us</Link>
               </nav>
             </div>

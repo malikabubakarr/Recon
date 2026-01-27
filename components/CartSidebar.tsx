@@ -118,7 +118,7 @@ export default function CartSidebar() {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-black/40">
+    <div className="fixed inset-0 z-50 flex justify-end bg-black/40" style={{ colorScheme: 'light' }}>
       {/* Overlay */}
       <div className="absolute inset-0" onClick={closeCart}></div>
 

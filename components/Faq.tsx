@@ -21,7 +21,7 @@ export default function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="container mx-auto px-4 py-16">
+    <section className="container mx-auto px-4 py-16" style={{ colorScheme: 'light' }}>
       <h2 className="text-3xl font-bold text-center mb-8">
         Recon FAQs
       </h2>
@@ -30,7 +30,7 @@ export default function Faq() {
         {faqs.map((item, i) => (
           <div
             key={i}
-            className="border rounded-xl overflow-hidden bg-white dark:bg-[#111]"
+            className="border rounded-xl overflow-hidden bg-white"
           >
             {/* Header */}
             <button
@@ -46,7 +46,7 @@ export default function Faq() {
 
             {/* Content */}
             {open === i && (
-              <div className="px-4 py-4 text-sm bg-rose-50 dark:bg-[#181818]">
+              <div className="px-4 py-4 text-sm bg-rose-50">
                 {item.a}
               </div>
             )}

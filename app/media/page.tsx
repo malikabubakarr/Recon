@@ -26,7 +26,7 @@ export default function MediaPage() {
 
   const mediaItems: MediaItem[] = [
     { id: 1, type: "image", title: "Recon Shoot", src: ["/ad11.jpg", "/ad12.jpg", "/ad13.jpg"] },
-    { id: 2, type: "image", title: "Recon Shoot", src: ["/45-1.jpg", "/45-2.jpg"] },
+    { id: 2, type: "image", title: "Recon Shoot", src: ["/45-1.jpg", "/45-2.jpg", "/ad13.jpg"] },
     { id: 3, type: "image", title: "Recon Shoot", src: "/all.jpg" },
     { id: 4, type: "video", title: "Recon Ad", src: "/video1.mp4" },
     { id: 5, type: "video", title: "Recon Promo", src: "/video2.mp4" },
@@ -90,7 +90,7 @@ export default function MediaPage() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50 py-16 px-6">
+    <div className="min-h-screen bg-neutral-50 py-16 px-6" style={{ colorScheme: 'light' }}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
