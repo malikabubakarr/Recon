@@ -28,8 +28,12 @@ export default function ProductCard({
   const handleAddToCart = () => {
     addToCart({ _id, name, price, qty: 1, image });
     setAdded(true);
-
     setTimeout(() => setAdded(false), 1000);
+  };
+
+  const handleBuyNow = () => {
+    addToCart({ _id, name, price, qty: 1, image });
+    window.dispatchEvent(new Event("openCart"));
   };
 
   return (
@@ -60,17 +64,11 @@ export default function ProductCard({
         Rs. {price}
       </p>
 
-      <div className="mt-auto flex items-center gap-4 pt-6">
-        <Link
-          href={`/products/${_id}`}
-          className="text-sm text-gray-700 underline hover:text-black transition"
-        >
-          View Details
-        </Link>
-
+      {/* buttons section */}
+      <div className="mt-auto pt-6 space-y-3">
         <button
           onClick={handleAddToCart}
-          className={`ml-auto px-5 py-2 rounded-full text-sm transition-all duration-200 ${
+          className={`w-full py-2 rounded-full text-sm transition-all duration-200 ${
             added
               ? "bg-green-600 text-white scale-105"
               : "bg-black text-white hover:bg-gray-800"
@@ -78,6 +76,20 @@ export default function ProductCard({
         >
           {added ? "Added ✓ check cart icon above" : "Add to Cart"}
         </button>
+
+        <button
+          onClick={handleBuyNow}
+          className="w-full py-2 rounded-full text-sm bg-orange-600 text-white hover:bg-orange-700 transition"
+        >
+          Buy Now
+        </button>
+
+        <Link
+          href={`/products/${_id}`}
+          className="block text-center text-sm text-gray-700 underline hover:text-black transition"
+        >
+          View Details
+        </Link>
       </div>
     </div>
   );

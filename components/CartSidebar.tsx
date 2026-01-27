@@ -19,6 +19,8 @@ export default function CartSidebar() {
   } = useCart();
 
   const [checkoutMode, setCheckoutMode] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
 
   const [form, setForm] = useState({
     firstName: "",
@@ -30,9 +32,6 @@ export default function CartSidebar() {
     address: "",
     paymentMethod: "cod",
   });
-
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
 
   const router = useRouter();
 
@@ -91,8 +90,11 @@ export default function CartSidebar() {
         return;
       }
 
+      // ✅ Clear cart, close sidebar, reset form
       clearCart();
       setCheckoutMode(false);
+      closeCart(); // instantly close cart
+
       setForm({
         firstName: "",
         lastName: "",
@@ -104,10 +106,11 @@ export default function CartSidebar() {
         paymentMethod: "cod",
       });
 
+      // ✅ Pass correct order ID (_id) to Thank You page
       router.push(
-        `/thank-you?orderId=${data.orderId}&paymentMethod=${form.paymentMethod}`
+        `/thank-you?orderId=${data.order._id}&paymentMethod=${form.paymentMethod}`
       );
-    } catch (err) {
+    } catch {
       setMessage("Something went wrong!");
     } finally {
       setLoading(false);
@@ -115,63 +118,65 @@ export default function CartSidebar() {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end dark:bg-transparent dark:text-black">
-      <div
-        className="fixed inset-0 cursor-pointer"
-        onClick={closeCart}
-      ></div>
+    <div className="fixed inset-0 z-50 flex justify-end bg-black/40">
+      {/* Overlay */}
+      <div className="absolute inset-0" onClick={closeCart}></div>
 
-      <div className="relative w-full sm:w-[400px] md:w-[450px] bg-white dark:bg-white h-full p-6 shadow-2xl border-l border-gray-200 dark:border-gray-200 overflow-y-auto dark:text-black">
+      {/* Sidebar */}
+      <div className="relative w-full sm:w-[420px] bg-white h-full p-6 shadow-2xl overflow-y-auto">
+        {/* Close */}
         <button
           onClick={closeCart}
-          className="absolute top-5 right-5 text-gray-400 hover:text-black dark:text-gray-400 dark:hover:text-black text-2xl"
+          className="absolute top-4 right-4 text-2xl text-gray-400 hover:text-black"
         >
           ✕
         </button>
 
-        <h2 className="text-2xl font-semibold mb-4 dark:text-black">Your Cart</h2>
+        <h2 className="text-2xl font-bold mb-5">Shopping Cart</h2>
 
+        {/* EMPTY CART */}
         {items.length === 0 && !checkoutMode && (
-          <p className="text-gray-500 dark:text-gray-700 mt-10 text-center">
-            Cart is empty.
+          <p className="text-center text-gray-500 mt-20">
+            Your cart is empty 🛒
           </p>
         )}
 
+        {/* CART ITEMS */}
         {!checkoutMode && items.length > 0 && (
           <>
-            <div className="space-y-5 max-h-[60vh] overflow-y-auto pr-2">
+            <div className="space-y-4 max-h-[55vh] overflow-y-auto pr-2">
               {items.map((item) => (
                 <div
                   key={item._id}
-                  className="flex gap-4 items-center border p-3 rounded-xl bg-white dark:bg-white dark:border-gray-200"
+                  className="flex gap-4 p-3 border rounded-xl"
                 >
                   {item.image && (
                     <Image
                       src={item.image}
                       alt={item.name}
-                      width={60}
-                      height={60}
+                      width={70}
+                      height={70}
                       className="rounded-lg object-cover"
                     />
                   )}
 
                   <div className="flex-1">
-                    <p className="font-medium dark:text-black">{item.name}</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-700">
+                    <p className="font-semibold">{item.name}</p>
+                    <p className="text-sm text-gray-500">
                       Rs. {item.price}
                     </p>
 
-                    <div className="flex items-center gap-2 mt-2">
+                    <div className="flex items-center gap-3 mt-2">
                       <button
                         onClick={() => decreaseQty(item._id)}
-                        className="w-7 h-7 border rounded-full flex items-center justify-center dark:border-gray-300"
+                        className="w-7 h-7 border rounded-full"
                       >
                         −
                       </button>
-                      <span className="dark:text-black">{item.qty}</span>
+                      <span>{item.qty}</span>
                       <button
                         onClick={() => addToCart({ ...item, qty: 1 })}
-                        className="w-7 h-7 border rounded-full flex items-center justify-center dark:border-gray-300"
+                        className="w-7 h-7 border rounded-full"
                       >
                         +
                       </button>
@@ -180,96 +185,92 @@ export default function CartSidebar() {
 
                   <button
                     onClick={() => removeFromCart(item._id)}
-                    className="text-red-500 hover:text-red-600"
+                    className="text-red-500 text-sm"
                   >
-                    Delete
+                    Remove
                   </button>
                 </div>
               ))}
             </div>
 
-            <div className="mt-6 border-t pt-4 space-y-2 dark:border-gray-200">
-              <p className="flex justify-between text-gray-700 dark:text-black">
+            {/* SUMMARY */}
+            <div className="mt-6 border-t pt-4 space-y-2">
+              <div className="flex justify-between">
                 <span>Subtotal</span>
                 <span>Rs. {totalAmount}</span>
-              </p>
-              <p className="flex justify-between text-gray-700 dark:text-black">
+              </div>
+              <div className="flex justify-between">
                 <span>Delivery</span>
                 <span>{delivery === 0 ? "FREE" : `Rs. ${delivery}`}</span>
-              </p>
-              <p className="flex justify-between font-semibold text-lg dark:text-black">
+              </div>
+              <div className="flex justify-between font-bold text-lg">
                 <span>Total</span>
                 <span>Rs. {grandTotal}</span>
-              </p>
-
-              <div className="mt-5 space-y-3">
-                <button className="w-full border py-2 rounded-lg dark:border-gray-300 dark:text-black">
-                  View Cart
-                </button>
-                <button
-                  onClick={() => setCheckoutMode(true)}
-                  className="w-full bg-black text-white py-2 rounded-lg"
-                >
-                  Checkout
-                </button>
               </div>
+
+              <button
+                onClick={() => setCheckoutMode(true)}
+                className="w-full mt-4 bg-black text-white py-3 rounded-lg"
+              >
+                Proceed to Checkout
+              </button>
             </div>
           </>
         )}
 
+        {/* CHECKOUT */}
         {checkoutMode && (
           <div className="mt-4">
-            <h3 className="text-xl font-semibold mb-4 dark:text-black">
-              Order Details
-            </h3>
+            <h3 className="text-xl font-bold mb-4">Checkout Details</h3>
 
-            <form className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-3">
                 <input
                   name="firstName"
                   placeholder="First Name"
-                  className="w-full border rounded-lg p-2 dark:bg-white dark:border-gray-300 dark:text-black"
                   value={form.firstName}
                   onChange={handleChange}
+                  className="border p-2 rounded-lg"
                 />
                 <input
                   name="lastName"
                   placeholder="Last Name"
-                  className="w-full border rounded-lg p-2 dark:bg-white dark:border-gray-300 dark:text-black"
                   value={form.lastName}
                   onChange={handleChange}
+                  className="border p-2 rounded-lg"
                 />
               </div>
 
               <input
                 name="phone"
                 placeholder="Phone"
-                className="w-full border rounded-lg p-2 dark:bg-white dark:border-gray-300 dark:text-black"
                 value={form.phone}
                 onChange={handleChange}
-              />
-              <input
-                name="email"
-                placeholder="Email"
-                className="w-full border rounded-lg p-2 dark:bg-white dark:border-gray-300 dark:text-black"
-                value={form.email}
-                onChange={handleChange}
+                className="border p-2 rounded-lg w-full"
               />
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <input
+                name="email"
+                placeholder="Email (optional)"
+                value={form.email}
+                onChange={handleChange}
+                className="border p-2 rounded-lg w-full"
+              />
+
+              <div className="grid grid-cols-2 gap-3">
                 <input
                   name="province"
-                  placeholder="Province / State"
-                  className="w-full border rounded-lg p-2 dark:bg-white dark:border-gray-300 dark:text-black"
+                  placeholder="Province"
                   value={form.province}
                   onChange={handleChange}
+                  className="border p-2 rounded-lg"
                 />
                 <input
                   name="city"
                   placeholder="City"
-                  className="w-full border rounded-lg p-2 dark:bg-white dark:border-gray-300 dark:text-black"
                   value={form.city}
                   onChange={handleChange}
+                  className="border p-2 rounded-lg"
                 />
               </div>
 
@@ -277,16 +278,15 @@ export default function CartSidebar() {
                 name="address"
                 placeholder="Full Address"
                 rows={3}
-                className="w-full border rounded-lg p-2 dark:bg-white dark:border-gray-300 dark:text-black"
                 value={form.address}
                 onChange={handleChange}
+                className="border p-2 rounded-lg w-full"
               />
 
-              <div className="flex gap-4 dark:text-black">
-                <label className="flex items-center gap-2">
+              <div className="flex gap-4">
+                <label className="flex gap-2 items-center">
                   <input
                     type="radio"
-                    value="cod"
                     checked={form.paymentMethod === "cod"}
                     onChange={() =>
                       setForm({ ...form, paymentMethod: "cod" })
@@ -294,10 +294,10 @@ export default function CartSidebar() {
                   />
                   Cash on Delivery
                 </label>
-                <label className="flex items-center gap-2">
+
+                <label className="flex gap-2 items-center">
                   <input
                     type="radio"
-                    value="bank"
                     checked={form.paymentMethod === "bank"}
                     onChange={() =>
                       setForm({ ...form, paymentMethod: "bank" })
@@ -308,28 +308,24 @@ export default function CartSidebar() {
               </div>
 
               <button
-                type="button"
                 onClick={placeOrder}
                 disabled={loading}
                 className="w-full bg-black text-white py-3 rounded-lg"
               >
-                {loading ? "Placing order..." : "Place Order"}
+                {loading ? "Placing Order..." : "Place Order"}
               </button>
 
               {message && (
-                <p className="text-center text-sm mt-2 text-red-500">
-                  {message}
-                </p>
+                <p className="text-center text-red-500 text-sm">{message}</p>
               )}
 
               <button
-                type="button"
                 onClick={() => setCheckoutMode(false)}
-                className="w-full border py-2 rounded-lg dark:border-gray-300 dark:text-black"
+                className="w-full border py-2 rounded-lg"
               >
                 Back to Cart
               </button>
-            </form>
+            </div>
           </div>
         )}
       </div>

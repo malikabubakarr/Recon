@@ -53,12 +53,51 @@ export default function ProductsClient() {
       });
   }, [brandFilter, categoryFilter]);
 
-  if (loading)
+  // ================== 🔥 PREMIUM LOADER ==================
+  if (loading) {
     return (
-      <p className="p-10 text-center text-gray-800 bg-white">
-        Loading products…
-      </p>
+      <section className="container mx-auto py-16 px-6 bg-white">
+        <style>
+          {`
+          .shimmer {
+            background: linear-gradient(
+              110deg,
+              #f0f0f0 8%,
+              #e5e5e5 18%,
+              #f0f0f0 33%
+            );
+            background-size: 200% 100%;
+            animation: shimmer 1.5s linear infinite;
+          }
+          @keyframes shimmer {
+            to {
+              background-position-x: -200%;
+            }
+          }
+        `}
+        </style>
+
+        <h1 className="font-thin text-4xl mb-12 text-gray-300 text-center">
+          Loading Products
+        </h1>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div
+              key={i}
+              className="border rounded-2xl p-4 space-y-4 shadow-sm"
+            >
+              <div className="h-48 rounded-xl shimmer" />
+              <div className="h-5 w-3/4 rounded shimmer" />
+              <div className="h-4 w-1/2 rounded shimmer" />
+              <div className="h-10 w-full rounded-xl shimmer" />
+            </div>
+          ))}
+        </div>
+      </section>
     );
+  }
+  // =======================================================
 
   // ------------------ SEO DATA ------------------
   const pageTitle = brandFilter
@@ -73,33 +112,28 @@ export default function ProductsClient() {
       : "Browse all RECON products online.";
 
   const canonicalUrl = `https://maksoninternational.com/products${
-    brandFilter ? `?brand=${brandFilter}` : categoryFilter ? `?category=${categoryFilter}` : ""
+    brandFilter
+      ? `?brand=${brandFilter}`
+      : categoryFilter
+      ? `?category=${categoryFilter}`
+      : ""
   }`;
 
   return (
     <>
-      {/* ------------------ SEO HEAD ------------------ */}
       <Head>
         <title>{pageTitle}</title>
         <meta name="description" content={pageDescription} />
-        <meta name="keywords" content={`RECON, Mason International, ${brandFilter || ""}, ${categoryFilter || ""}`} />
-
-        {/* Open Graph */}
-        <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content={pageDescription} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={canonicalUrl} />
-        {/* Optional: You can add a default OG image */}
-        <meta property="og:image" content="/default-og-image.jpg" />
-
-        {/* Canonical */}
         <link rel="canonical" href={canonicalUrl} />
       </Head>
 
-      {/* ------------------ PAGE CONTENT ------------------ */}
       <section className="container mx-auto py-16 px-6 bg-white">
         <h1 className="font-thin text-4xl mb-12 text-gray-800 text-center">
-          {brandFilter ? `${brandFilter} Products` : categoryFilter ? `${categoryFilter} Products` : "All Products"}
+          {brandFilter
+            ? `${brandFilter} Products`
+            : categoryFilter
+            ? `${categoryFilter} Products`
+            : "All Products"}
         </h1>
 
         {products.length === 0 ? (

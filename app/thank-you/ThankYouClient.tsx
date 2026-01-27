@@ -25,7 +25,7 @@ export default function ThankYouClient() {
         </p>
 
         <p className="text-gray-600 mb-6">
-          <b>Order ID:</b> <span className="text-black">{orderId}</span>
+          <b>Order ID:</b> <span className="text-black font-mono">{orderId}</span>
         </p>
 
         {paymentMethod === "bank" ? (
